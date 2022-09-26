@@ -1,0 +1,5 @@
+apps:
+  - script: './dist/projects/app/main.js'
+    name: 'app'
+    exec_mode: 'fork'
+    instances: 1

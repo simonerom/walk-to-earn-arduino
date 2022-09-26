@@ -1,0 +1,29 @@
+features:
+  - mqtt
+  - blockchain
+host:
+  privatekey: "0xbd8ddc8086f99c2221ece7c0c2e13d25456a38ac487ef9e73e9d3b0697732ea6"
+startHeight: 16527662
+dataSources:
+  - kind: ethereum/contract
+    name: DeviceRegistry
+    source:
+      address: 1d823371547589f066ef878e3d601223F25A0Df0
+      abi: DevicesRegistry
+    eventHandlers:
+      - event: DeviceRegistered
+        handler: onDeviceRegistered
+  - kind: ethereum/contract
+    name: WalkToEarn
+    source:
+      address: f5b4bde449BDbAfa4B04e5C752C4884ec0Ef8fde
+      abi: WalkToEarn
+    eventHandlers:
+      - event: ActivityRequested
+        handler: onActivityRequested
+  - kind: mqtt
+    name: MQTT
+    topics: /device/#
+    handlers:
+      - topicReg: ^/device\/[a-fA-F0-9]+\/data$
+        handler: onMqttData

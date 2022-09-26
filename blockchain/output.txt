@@ -1,0 +1,36 @@
+Compiled 12 Solidity files successfully
+Deploying contracts with the account: 0x169dc1Cfc4Fd15ed5276B12D6c10CE65fBef0D11
+Account balance: 1759.923877  IOTX
+
+Deploying DeviceBinding contract
+DeviceBinding Contract
+address: 0xE60b87F053e78335876448B5E3Bc4296AEd7B08f
+block: 16527662
+
+Deploying DevicesRegistry contract
+DevicesRegistry Contract
+address: 0x1d823371547589f066ef878e3d601223F25A0Df0
+block: 16527663
+
+Deploying StepToken contract
+StepToken Contract
+address: 0xB305e1E6df7f0858FE656E3d380D6F6509dEDBDB
+block: 16527666
+
+Deploying WalkToEarn contract
+WalkToEarn Contract
+address: 0xf5b4bde449BDbAfa4B04e5C752C4884ec0Ef8fde
+block: 16527669
+Funding the WalkToEran contract
+Balance:  BigNumber { value: "10000000000000000000000000000" }  STP
+
+
+************* NEXT STEPS **************
+* 1. update W3bStream ABIs            *
+* 2. configure project.yaml           *
+* 3. npm run build                    *
+* 4. node dist/projects/app/initdb.js *
+***************************************
+* Nr. 4 is always required when       *
+* editing project.yaml or ABI files   *
+***************************************
