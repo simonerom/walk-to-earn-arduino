@@ -1,18 +1,11 @@
-# MachineFi - Getting started
-
-Get started with a minimal MachineFi architecture including an MQTT broker, Postgres database, Hasura engine and a basic Layer-2 service to implement the data logic based on data received from devices and blockchain smart contracts that manage the authorization and tokenomics part. A simple data simulator script is also included to facilitate prototyping.  
-
-**Note:** ⚠️ this is only boilerplate code to facilitate MachineFi Dapps prototyping. However, it's not intended for production applications as this architecture is not scalable or composable.  
-A full tutorial is available at https://developers.iotex.io/posts/deploy-a-machinefi-dapp.  
-
-Please stay tuned on next releases of the IoTeX MachineFi architecture.  
-
+# Walk To Earn Workshop 
 ## Requirements
 
 - NodeJS: tested using version 14
 - Python 3
 - Npm
 - Docker and docker-compose
+- psql (Postgres command line client)
 
 ## Running the app
 
@@ -44,38 +37,50 @@ npm install
 echo IOTEX_PRIVATE_KEY=<YOUR_PRIVATE_KEY> > .env
 npx hardhat run scripts/deploy.js --network <NETWORK>
 ```
+Save the output to `otput.txt` and import the STEP Token contract in Metamask.
 
-Edit `src/projects/app/project.yaml` and change `startHeight` and `DataSourceRegistry` to match your contract details.  
+Edit `src/projects/app/project.yaml` and 
+1. Input the same private key you used to deploy the contracts above
+2. change `startHeight` with the height you deployed deviceRegistry.sol
+3. Update contract addresses with those you deployed
 
 Register a device:  
 ```shell
-cd blockchain
-npm install
-npx hardhat registerDevice --deviceaddress <DEVICE_ADDRESS> --contractaddress <CONTRACT_ADDRESS> --network <NETWORK>
+# Update the deviceId and registryContract address accordingly to your device and deployment
+npx hardhat registerDevice --deviceid 04b687e298ad52eec4fe32b27af45247f3659062 --registrycontract 3828fC74E1c4C57E353AB99FC5B3fF2A89ef6720  --network testnet
 ```
 
-Run the simulator:  
-```shell
-cd simulator
-python3 simulator.py
-```
+Do some steps activity moving the device...
 
-Build the data layer app and initialize the database:  
+Build the W3bstream app and initialize the database:  
 ```shell
 npm run build
 npm run initdb
 ```
 
-Start the data layer app:  
+Start W3bstream:  
 ```shell
 npm run app
 ```
 
-## Modifying the app
 
-You can monitor other contracts just by adding them to `src/projects/app/project.yaml`. For each contract, you should define your event handlers based on your application.  
-Edit `handlers.ts` to add additional handlers for contract events and MQTT data received events.  
-You can add more tables to the database by modifying the files inside `src/project/app/models`.  
+Bind a device to the owner's wallet to receive the rewards:  
+```shell
+cd blockchain
+# Update the deviceId and bindingContract address and owner addressaccordingly to your device, deployment and metamask account
+npx hardhat bindDevice --deviceid 04b687e298ad52eec4fe32b27af45247f3659062 --owneraddress 0x169dc1Cfc4Fd15ed5276B12D6c10CE65fBef0D11 --contractaddress 0x242688423D4DDA708642e4b32Ab72a5b23b7D86f  --network testnet
+```
+
+Claim steps rewards from W3bstream
+```
+# Update deviceid with your device id and contractaddress with your WalkToEarn contract address
+npx hardhat claimActivityRequest --deviceid 04b687e298ad52eec4fe32b27af45247f3659062 --contractaddress 0x401677815F75026C2328E723202983D2232671c7 --network testnet
+```
+
+Withdraw your STP rewards to your metamask account
+```
+npx hardhat claimRewards --owneraddress 0x169dc1Cfc4Fd15ed5276B12D6c10CE65fBef0D11 --contractaddress 0x401677815F75026C2328E723202983D2232671c7 --network testnet
+```
 
 ## Debugging in VSCode
 
