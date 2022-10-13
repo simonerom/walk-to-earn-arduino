@@ -150,7 +150,7 @@ async function processDataRequest(
 async function onMqttData(context: ProjectContext, topic: string, payload: Buffer) {
 
   console.log("\nReceived a message on topic: ", topic);
-
+  console.log(payload.toString());
   let mqttPayloadObj = eval('(' + payload.toString() + ')');
   
   console.log("Payload: ", JSON.stringify(mqttPayloadObj, null, 2));

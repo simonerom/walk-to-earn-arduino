@@ -3,7 +3,7 @@ features:
   - blockchain
 host:
   privatekey: "0xbd8ddc8086f99c2221ece7c0c2e13d25456a38ac487ef9e73e9d3b0697732ea6"
-startHeight: 16527662
+startHeight: 16634953
 dataSources:
   - kind: ethereum/contract
     name: DeviceRegistry
